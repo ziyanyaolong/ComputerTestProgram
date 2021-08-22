@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7436EF73-478D-48B0-AA5F-A3E78A136CC1}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>ComputerTestProgram</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtBuildConfig>debug</QtBuildConfig>
+    <QtModules>core;gui;multimedia;multimediawidgets;network;networkauth;nfc;opengl;openglextensions;serialport;widgets</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>$(ProjectDir)/src;$(ProjectDir)/include/halcon/halconcpp;$(ProjectDir)/include/halcon;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)/lib/halcon;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <AdditionalDependencies>halconcpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)/lib/halcon;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="include\halcon\com\HalconXimport_i.c" />
+    <ClCompile Include="src\common\Interface\COM_Port\COM_Port.cpp" />
+    <ClCompile Include="src\core\DataTable\DataTable.cpp" />
+    <ClCompile Include="src\core\GUI\GUI.cpp" />
+    <ClCompile Include="src\core\Halcon\HalconVidicon\HalconVidicon.cpp" />
+    <ClCompile Include="src\core\Main\main.cpp" />
+    <ClCompile Include="src\core\ObtainingLocalData\CPULocalData\CPULocalData.cpp" />
+    <ClCompile Include="src\core\ObtainingLocalData\MemoryLocalData\MemoryLocalData.cpp" />
+    <ClCompile Include="src\core\ObtainingLocalData\ObtainingLocalData.cpp" />
+    <ClCompile Include="src\core\Performeter\Performeter.cpp" />
+    <QtRcc Include="res.qrc" />
+    <QtUic Include="src\core\GUI\GUI.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\common\Interface\COM_Port\COM_Port.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\halcon\com\HalconCOM.h" />
+    <ClInclude Include="include\halcon\com\HalconXimport.h" />
+    <ClInclude Include="include\halcon\Halcon.h" />
+    <ClInclude Include="include\halcon\HalconC.h" />
+    <ClInclude Include="include\halcon\HalconCDefs.h" />
+    <ClInclude Include="include\halcon\halconcpp\HalconAPI.h" />
+    <ClInclude Include="include\halcon\halconcpp\HalconCpp.h" />
+    <ClInclude Include="include\halcon\halconcpp\HalconCppForwards.h" />
+    <ClInclude Include="include\halcon\halconcpp\HalconCppIncludes.h" />
+    <ClInclude Include="include\halcon\halconcpp\HBarCode.h" />
+    <ClInclude Include="include\halcon\halconcpp\HBarrier.h" />
+    <ClInclude Include="include\halcon\halconcpp\HBeadInspectionModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HBgEsti.h" />
+    <ClInclude Include="include\halcon\halconcpp\HCalibData.h" />
+    <ClInclude Include="include\halcon\halconcpp\HCameraSetupModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HCamPar.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassBox.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassGmm.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassKnn.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassLUT.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassMlp.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassSvm.h" />
+    <ClInclude Include="include\halcon\halconcpp\HClassTrainData.h" />
+    <ClInclude Include="include\halcon\halconcpp\HColorTransLUT.h" />
+    <ClInclude Include="include\halcon\halconcpp\HComponentModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HComponentTraining.h" />
+    <ClInclude Include="include\halcon\halconcpp\HComputeDevice.h" />
+    <ClInclude Include="include\halcon\halconcpp\HCondition.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDataBase.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDataCode2D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDeformableModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDeformableSurfaceMatchingResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDeformableSurfaceModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDescriptorModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDevThread.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDevWindowStack.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDict.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlClassifier.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlClassifierResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlClassifierTrainResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlDevice.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlModelOcr.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDlPrune.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDrawingObject.h" />
+    <ClInclude Include="include\halcon\halconcpp\HDualQuaternion.h" />
+    <ClInclude Include="include\halcon\halconcpp\HEvent.h" />
+    <ClInclude Include="include\halcon\halconcpp\HException.h" />
+    <ClInclude Include="include\halcon\halconcpp\HFeatureSet.h" />
+    <ClInclude Include="include\halcon\halconcpp\HFile.h" />
+    <ClInclude Include="include\halcon\halconcpp\HFramegrabber.h" />
+    <ClInclude Include="include\halcon\halconcpp\HFunction1D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HGnuplot.h" />
+    <ClInclude Include="include\halcon\halconcpp\HHandle.h" />
+    <ClInclude Include="include\halcon\halconcpp\HHandleBase.h" />
+    <ClInclude Include="include\halcon\halconcpp\HHomMat2D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HHomMat3D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HImage.h" />
+    <ClInclude Include="include\halcon\halconcpp\HInfo.h" />
+    <ClInclude Include="include\halcon\halconcpp\HIOChannel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HIODevice.h" />
+    <ClInclude Include="include\halcon\halconcpp\HIOStream.h" />
+    <ClInclude Include="include\halcon\halconcpp\HLexicon.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMatrix.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMeasure.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMessage.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMessageQueue.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMetrologyModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMisc.h" />
+    <ClInclude Include="include\halcon\halconcpp\HMutex.h" />
+    <ClInclude Include="include\halcon\halconcpp\HNCCModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HObject.h" />
+    <ClInclude Include="include\halcon\halconcpp\HObjectBase.h" />
+    <ClInclude Include="include\halcon\halconcpp\HObjectModel3D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCRBox.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCRCnn.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCRKnn.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCRMlp.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCRSvm.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOCV.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOperatorOverloads.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOperatorSet.h" />
+    <ClInclude Include="include\halcon\halconcpp\HOperatorSetLegacy.h" />
+    <ClInclude Include="include\halcon\halconcpp\HPose.h" />
+    <ClInclude Include="include\halcon\halconcpp\HQuaternion.h" />
+    <ClInclude Include="include\halcon\halconcpp\HRegion.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSampleIdentifier.h" />
+    <ClInclude Include="include\halcon\halconcpp\HScatteredDataInterpolator.h" />
+    <ClInclude Include="include\halcon\halconcpp\HScene3D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSerial.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSerializedItem.h" />
+    <ClInclude Include="include\halcon\halconcpp\HShapeModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HShapeModel3D.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSheetOfLightModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSmartPtr.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSocket.h" />
+    <ClInclude Include="include\halcon\halconcpp\HStereoModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HString.h" />
+    <ClInclude Include="include\halcon\halconcpp\HStructuredLightModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSurfaceMatchingResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSurfaceModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HSystem.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTemplate.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTextModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTextResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTextureInspectionModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTextureInspectionResult.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTuple.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTupleElement.h" />
+    <ClInclude Include="include\halcon\halconcpp\HTupleLegacy.h" />
+    <ClInclude Include="include\halcon\halconcpp\HVariationModel.h" />
+    <ClInclude Include="include\halcon\halconcpp\HVector.h" />
+    <ClInclude Include="include\halcon\halconcpp\HWindow.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLD.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDCont.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDDistTrans.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDExtPara.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDModPara.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDPara.h" />
+    <ClInclude Include="include\halcon\halconcpp\HXLDPoly.h" />
+    <ClInclude Include="include\halcon\halconc\Hdevthread.h" />
+    <ClInclude Include="include\halcon\halconc\Hvector.h" />
+    <ClInclude Include="include\halcon\HBase.h" />
+    <ClInclude Include="include\halcon\hclib\hclib_types.h" />
+    <ClInclude Include="include\halcon\HConst.h" />
+    <ClInclude Include="include\halcon\HCtype.h" />
+    <ClInclude Include="include\halcon\HDeclSpec.h" />
+    <ClInclude Include="include\halcon\hdevengine\HDevEngineCpp.h" />
+    <ClInclude Include="include\halcon\HErrorDef.h" />
+    <ClInclude Include="include\halcon\HExtern.h" />
+    <ClInclude Include="include\halcon\HIntDef.h" />
+    <ClInclude Include="include\halcon\HInterfaceC.h" />
+    <ClInclude Include="include\halcon\hlib\CIOFrameGrab.h" />
+    <ClInclude Include="include\halcon\hlib\CIOFrameGrabDefines.h" />
+    <ClInclude Include="include\halcon\hlib\CIOIIDevice.h" />
+    <ClInclude Include="include\halcon\hlib\CIOIIDeviceDefines.h" />
+    <ClInclude Include="include\halcon\hlib\CORE1.h" />
+    <ClInclude Include="include\halcon\hlib\DBNew.h" />
+    <ClInclude Include="include\halcon\hlib\HAlloc.h" />
+    <ClInclude Include="include\halcon\hlib\HBaseGP.h" />
+    <ClInclude Include="include\halcon\hlib\HComputeDeviceExt.h" />
+    <ClInclude Include="include\halcon\hlib\HError.h" />
+    <ClInclude Include="include\halcon\hlib\HInstance.h" />
+    <ClInclude Include="include\halcon\hlib\HInstanceDefines.h" />
+    <ClInclude Include="include\halcon\hlib\HMessageQueue.h" />
+    <ClInclude Include="include\halcon\hlib\HObjectModel3D.h" />
+    <ClInclude Include="include\halcon\hlib\HpThread.h" />
+    <ClInclude Include="include\halcon\hlib\HRLClip.h" />
+    <ClInclude Include="include\halcon\hlib\HXLD.h" />
+    <ClInclude Include="include\halcon\hlib\IOSpy.h" />
+    <ClInclude Include="include\halcon\HMacro.h" />
+    <ClInclude Include="include\halcon\HParallel.h" />
+    <ClInclude Include="include\halcon\HProto.h" />
+    <ClInclude Include="include\halcon\HVersNum.h" />
+    <ClInclude Include="include\halcon\IPType.h" />
+    <ClInclude Include="src\core\DataTable\DataTable.h" />
+    <ClInclude Include="src\core\ObtainingLocalData\ObtainingLocalData.h" />
+    <QtMoc Include="src\core\Performeter\Performeter.h" />
+    <QtMoc Include="src\core\ObtainingLocalData\MemoryLocalData\MemoryLocalData.h" />
+    <QtMoc Include="src\core\ObtainingLocalData\CPULocalData\CPULocalData.h" />
+    <QtMoc Include="src\core\Halcon\HalconVidicon\HalconVidicon.h" />
+    <QtMoc Include="src\core\GUI\GUI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="include\halcon\com\HalconXimport.idl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
